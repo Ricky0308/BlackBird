@@ -1,0 +1,39 @@
+@import '../node_modules/bootstrap/scss/functions';
+
+$primary:rgba(22, 27, 34, .97);
+$secondary: rgba(1, 4, 9, .7);
+$basic:rgba(177, 177, 177, .8);
+
+
+
+@import "../node_modules/bootstrap/scss/variables";
+
+$custom-theme-colors:(
+    "basic": $basic,
+);
+
+$custom-spacers:(
+    6: $spacer * 4,
+    7: $spacer * 5,
+    8: $spacer * 6,
+    9: $spacer * 7,
+    10: $spacer * 8,
+);
+
+$custom-position-values:();
+$step10:(10, 20 30, 40, 50, 60 ,70, 80, 90);
+
+@for $i from 1 through 100{
+    $value:(#{$i}:"#{$i}%");
+    $custom-position-values: map-merge($custom-position-values, $value);
+}
+
+$position-values: map-merge($position-values, $custom-position-values);
+$theme-colors: map-merge($theme-colors, $custom-theme-colors);
+$spacers: map-merge($spacers, $custom-spacers);
+
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/root";
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+

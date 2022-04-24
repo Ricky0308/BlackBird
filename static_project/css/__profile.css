@@ -1,0 +1,483 @@
+/* 
+*{
+	box-sizing: border-box;
+	font-family: monospace, monospace;
+	color: rgba(177, 177, 177, .8);
+}
+
+body{
+	background-color: rgba(22, 27, 34, .97);
+}
+
+
+*::-webkit-scrollbar{
+	width: 7px;
+	background: rgba(0, 0, 0, 0);
+	border-radius: 8px;
+}
+*::-webkit-scrollbar-thumb{
+	background-color: rgba(177, 177, 177, .25);
+	border-radius: 8px;
+}
+
+.clr{
+	clear: both;
+}
+
+a{
+	color: rgba(4, 104, 255, .7);
+}
+
+a:hover{
+	text-decoration: none;
+	color: rgba(4, 104, 255, .4);
+}
+
+.space{
+	height: 70px;
+}
+
+
+/********************************************************/
+
+
+@media screen and (max-width: 768px){
+
+	.basic-info h3{
+	overflow-y: scroll;
+	font-size: 20px;
+	min-height: 35px;
+	max-height: 35px;
+	}
+
+	.basic-info p{
+	word-wrap: break-word;
+	overflow-y: scroll;
+	max-height: 130px;
+	}
+}
+
+@media screen and (max-width: 480px){
+	.basic-info h3{
+	overflow-y: scroll;
+	font-size: 15px;
+	}
+
+	.basic-info p{
+		font-size: 12px;
+	}
+}
+
+
+.profile-container{
+	padding: 10px 70px;
+}
+
+.picture-container{
+	padding: 3px;
+	float: left;
+	width: 25%;
+	border: solid 2px gray;
+	background-color: gray;
+	border-radius: 8px;
+}
+
+.profile-picture{
+	margin: auto 0;
+
+	width: 100%;
+}
+
+.basic-info{
+	float: left;
+	padding: 2%;
+	display: flex;
+	flex-direction: column;
+
+	width: 75%;
+	max-height: 300px;
+}
+
+.basic-info h3{
+	overflow-y: scroll;
+	min-height: 35px;
+	max-height: 35px;
+}
+
+
+.basic-info p{
+	word-wrap: break-word;
+	overflow-y: scroll;
+}
+
+
+
+
+
+
+
+/*-------------------About this person-----------------------*/
+
+
+.comment_RI{
+	margin: 20px 80px;
+	font-size: 20px;
+}
+
+.revealable-info-container{
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0.5%;
+	margin: -15px 70px 20px 70px;
+
+	min-height: 50px;
+	border: solid 2px dimgray;
+	border-radius: 8px;
+}
+
+.revealable-info-container div{
+	padding: 3px 5px;
+
+	background-color: rgba(245, 242, 73, 0.7);
+	border: solid 2px rgba(177, 145, 137, 1);
+
+	color: rgba(20, 20, 20, .9);
+	text-align: center;
+	border-radius: 8px;
+	margin: 2px;
+	box-shadow: 1px 1px 3px 0px rgba(158, 157, 102, .5);
+}
+
+
+.trasparent-btn{
+	float: right;
+	padding: 0 3px;
+	margin-right: 75px;
+	font-size: 15px;
+	font-weight: 600;
+
+	color: rgba(45, 112, 255, 1);
+	border: solid 2px ;
+	border-color: rgba(45, 112, 255, 1);
+	background-color: rgba(0, 81, 255, .3);
+	border-radius: 8px;
+}
+
+.trasparent-btn:hover{
+	color: rgba(36, 88, 199, 1);
+	border-color:  rgba(36, 88, 199);
+	background-color: rgba(0, 81, 255, .1);
+}
+
+
+
+
+
+
+
+
+
+/*------------------------Rooms--------------------------*/
+
+@media screen and (min-width: 1024px){
+	.ex-space2{height: 70px;}
+
+	.room-area-container{
+	display: flex;
+	}
+
+	.room-container{
+		min-height: 500px;
+		max-height: 500px;
+	}
+
+	.room{
+		flex-basis: 200px;
+	}
+
+	.room-picture{
+	min-height: 100px;
+	max-height: 100px;
+	}
+
+	.room-picture img{
+	max-height: 100px;
+	}
+
+	.room-text{
+		min-width: 155px;
+	}
+
+}
+
+
+@media screen and (min-width: 768px) and (max-width:1024px){
+	.ex-space2{height: 40px;}
+	.ex-space1{height: 40px;}
+
+	.room-container{
+		max-height: 400px;
+		min-height: 250px;
+	}
+}
+
+@media screen and (max-width: 1024px){
+
+	.room-picture{
+	min-height: 70px;
+	max-height: 70px;
+	}
+
+	.room-picture img{
+	max-height: 70px;
+	}
+
+	.room-text{
+		min-width: 100px;
+		max-width: 100px;
+	}
+}
+
+
+@media screen and (max-width:768px){
+	.ex-space1{height: 40px;}
+	.ex-space2{height: 40px}
+
+	.room-container{
+		max-height: 300px;
+		min-height: 250px;
+	}
+}
+
+@media screen and (min-width: 480px){
+	.room-container{
+		flex-wrap: wrap;
+	}
+
+	.room{
+		flex-basis: 100px;
+	}
+
+	.room-picture{
+		width: 100%;
+	}
+
+	.room-name{
+		max-width: 155px;
+	}
+
+	.room-text{
+		max-height: 65px;
+		max-height: 65px;
+		min-height: 65px;
+		max-width: 155px;
+	}
+}
+
+@media screen and (max-width: 480px){
+	.room-container{
+		flex-direction: column;
+	}
+
+	.room{
+		display: flex;
+		flex-basis: 1;
+	}
+
+	.room-picture{
+		max-width: 80px;
+		min-width: 80px;
+
+	}
+
+	.room-name{
+		font-size: 14px;
+		width: 100%;
+	}
+
+	.room-text{
+		font-size: 12px;
+		max-width: 200px;
+	}
+}
+
+
+.room-area-container{
+	padding: 0% 5%;
+	width: 100%;
+}
+
+
+
+.room-container{
+	display: flex;
+	padding: 10px;
+	margin: 10px;
+
+	overflow-y: scroll;
+	overflow-x: hidden;
+	flex-grow: 1;
+	flex-basis: 1;
+	align-content: flex-start;
+
+	background-color: rgba(1, 4, 9, .7);
+	border-radius: 8px;
+	border: solid 3px;
+	max-width: 100%;
+	min-width: 240px;
+}
+
+.script-sticker{
+	position: relative;
+	background-color: gray;
+}
+
+.script{
+	position: absolute;
+	top: -30px;
+	left: 15px;
+	min-width: 270px;
+	font-size: 20px;
+}
+
+.membered{
+	position: relative;
+	border-color: rgba(255, 0, 0, 0.5);
+	box-shadow: 0px 0px 10px 0px rgba(255, 0, 0, 0.5);
+}
+
+.owned{
+	position: relative;
+	border-color: rgba(0, 60, 255, .8);
+	box-shadow: 0px 0px 10px 0px rgba(0, 60, 255, .8);
+}
+
+.invited{
+	position: relative;
+	border-color: rgba(255, 251, 0, .6);
+	box-shadow: 0px 0px 10px 0px rgba(255, 251, 0, .6);
+}
+
+.room{
+	margin: 5px;
+	padding: 15px 15px 8px 15px;
+
+	flex-grow: 0;
+	flex-shrink: 0;
+
+	background-color: rgba(240, 240, 240, .4);
+	border: solid 2px rgba(177, 145, 137, 1);
+	border-radius: 10px;
+	max-height: 230px;
+}
+
+.room-picture{
+	display: flex;
+	justify-content: center;
+	border-radius: 8px;
+	background-color: gray;
+	/*min-height: 100px;
+	max-height: 100px;*/
+}
+
+.room-picture img{
+	margin: auto;
+	border-radius: 8px;
+	max-width: 100%;
+	/*max-height: 100px;*/
+}
+
+.room-info{
+	margin: 5px;
+	max-height: 80px;
+	display: flex;
+	flex-direction: column;
+}
+
+.room-name{
+	font-weight: bold;
+
+	min-height: 20px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+}
+
+.room-text{
+	margin-top: 3px;
+	font-size: 14px;
+	color: rgba(45, 45, 45);
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
+
+
+
+
+
+/*-----------------------Flex experiment--------------------------*/
+
+.test2{
+	display: flex;
+	flex-wrap: wrap;
+	background-color: gray;
+}
+
+.element{
+	display: flex;
+	flex-wrap: wrap;
+
+	flex-basis: 1;
+	
+	background-color: blue;
+	border: solid 5px black;
+}
+
+.str{
+	background-color: gray;
+	word-wrap: break-word;
+}
+
+
+
+
+.test{
+	display: flex;
+}
+
+.flex-wrapper{
+	display: flex;
+	flex-wrap: wrap;
+	padding: 30px;
+	background-color: lightgreen;
+	max-height: 300px;
+
+	overflow-y: scroll;
+	
+}
+
+.flex-wrapper div{
+	padding: 35px 10px;
+	margin: 10px;
+
+	border: solid 2px black;
+	width: auto;
+	height: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ */

@@ -1,0 +1,25 @@
+
+.error-message{
+    color: rgba(199, 82, 36, .7);
+	border: solid 2px ;
+	border-color: rgba(199, 82, 36, .7);
+	background-color: rgba(199, 82, 36, .2);
+	border-radius: 8px;
+    width: max-content;
+    margin: 0 auto 3px auto;
+    padding: 1px 10px;
+}
+
+input, select{
+    margin-bottom: 3.5vh;
+    color: black;
+}
+
+select{
+    padding: 5px;
+}
+
+.transparent-btn{
+    float: right;
+    margin-right: 20vw;
+}

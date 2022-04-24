@@ -15,3 +15,7 @@ class TimezoneMiddleware:
 			timezone.deactivate()
 
 		return self.get_response(request)
+
+class FootprintMiddleware:
+	# middleware for creating footprints
+	pass 

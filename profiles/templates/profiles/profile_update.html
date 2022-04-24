@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+BB - Profile Update
+{% endblock title %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile_update.css' %}">
+
+</head>
+<body>
+	<div class="form-wrapper">
+		<div class="name-wrapper">
+		<a href="{% url 'profile' uidb64=uid %}">{{ profile.first_name }} {{ profile.last_name }}</a>
+		</div>
+		<form method="post" enctype="multipart/form-data" action="{% url 'profile_update' uidb64=uid %}">{% csrf_token %}
+			<div class="element-wrapper picture-wrapper">
+				<img class="profile-picture" src="{{ profile.avatar.url }}" alt="no image"/>
+			</div>
+			<div class="element-wrapper file-wrapper">
+				{{ form.avatar }}
+			</div>
+			<div class="element-wrapper">
+				<p>First name</p>
+				{{ form.first_name }}
+			</div>
+			<div class="element-wrapper">
+				<p>Last name</p>
+				{{ form.last_name }}
+			</div>
+			<div class="element-wrapper">
+				<p>Bio</p>
+				{{ form.bio }}
+			</div>
+			<div class="element-wrapper">
+				<p>Self-report English level</p>
+				{{ form.english_level_g }}
+			</div>
+			<div class="element-wrapper">
+				<p>Timezone</p>
+				{{ form.timezone }}
+			</div>
+
+			<div class="important-info">
+
+				<div class="important-info-description">
+					You can't change info below immediately. 
+					After pushing "change" button, please wait untill the changes will be approved by the admin.
+				</div>
+
+				<div class="element-wrapper">
+				<p>Sex (requested)</p>
+				{{ form.next_sex }}
+				</div>
+
+				<div class="element-wrapper">
+				<p>Country (requested)</p>
+				{{ form.next_country }}
+				</div>
+
+				<div class="element-wrapper">
+				<p>Age (requested)</p>
+				{{ form.next_age }}
+				</div>
+
+				<div class="element-wrapper">
+				<p>TOEFL (requested)</p>
+				{{ form.next_toefl }}
+				</div>
+
+				<div class="element-wrapper picture-wrapper certification-wrapper">
+					<p>Certification for TOEFL</p>
+					<img class="profile-picture" src="{{ profile.certification_toefl.url }}" alt="no certification"/>
+				</div>
+				<div class="element-wrapper file-wrapper">
+					{{ form.certification_toefl }}
+				</div>
+
+				<div class="element-wrapper">
+				<p>IELTS (requested)</p>
+				{{ form.next_ielts }}
+				</div>
+
+				<div class="element-wrapper picture-wrapper certification-wrapper">
+					<p>Certification for IELTS</p>
+					<img class="profile-picture" src="{{ profile.certification_ielts.url }}" alt="no certification"/>
+				</div>
+				<div class="element-wrapper file-wrapper">
+					{{ form.certification_ielts }}
+				</div>
+
+				
+
+			</div>
+
+
+			<div class="space2"></div>
+			<button class="btn" type="submit">change</button>
+		</form> 
+	</div>
+	<a href="{% url 'home' %}">Home</a>
+	<a href="{% url 'profile' uidb64=uid %}">Profile</a>
+	<div class="space"></div>
+	<div class="space"></div>
+	<div class="space"></div>
+</body>
+</html>
+
+{% endblock content %}

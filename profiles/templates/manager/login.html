@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Login
+{% endblock title %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+	{% for message in errors %}
+		<div class="error-message mt-3">{{ message }}</div>
+	{% endfor %}
+	<div class="form-wrapper text-center test-wrapper">
+		<form method="post">
+			{% csrf_token %}
+			<div class="my-2">email</div>
+			{{ loginform.email }}
+			<div class="my-2">password</div>
+			{{ loginform.password }}
+			<button class="transparent-btn d-block m-auto mt-3 px-5" type="submit">Login</button>
+		</form>
+		
+		<a href="{% url 'password_reset' %}">Forgot your password??</a>
+	</div>
+	
+	<!-- <div>
+		debug : {{ debug }}
+	</div>
+	<div>
+		debug2 : {{ debug2 }}
+	</div>
+	<div>
+		errors : {{ errors }}
+	</div> -->
+</body>
+</html>
+
+{% endblock content %}

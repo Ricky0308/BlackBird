@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+from telnetlib import AUTHENTICATION
+import environ
 from pathlib import Path
 import os
 
@@ -40,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'exp',
     'profiles',
-    'reviews',
     'rooms',
     'home',
 ]
@@ -69,6 +69,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'bb2.context_processors.adjust_for_navbar'
             ],
         },
     },
@@ -88,8 +89,12 @@ DATABASES = {
 }
 
 
-# Password validation
+# Password validation and authenticaton
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
+
+AUTHENTICATION_BACKENDS = ['bb2.authentication.EmailBackend', 
+    'bb2.authentication.DebugBackend']
+#'django.contrib.auth.backends.ModelBackend'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -143,13 +148,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Email  
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+env = environ.Env()
+environ.Env.read_env()
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_USE_TLS = True
-#EMAIL_HOST = 'smtp.gmail.com'
-#EMAIL_HOST_USER = 'green0308@softbank.ne.jp'
-#EMAIL_HOST_PASSWORD = ''
-#EMAIL_PORT = 587
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
 
+RECIPIENT_ADDRESS = env('RECIPIENT_ADDRESS')
 
+# authentication 
+LOGIN_URL = 'login'
 

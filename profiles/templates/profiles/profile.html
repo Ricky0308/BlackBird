@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Profile
+{% endblock title %}
+
+{% block content %}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+
+    <!-- ../static_cdn/static_root/admin/css/profile.css -->
+</head>
+<body>
+
+	<section>
+		<div class="main-info">
+			<div class="pic-container">
+				<img class="profile-pic mw-70 p-2 d-block m-auto" src="{{ profile.avatar.url }}" alt="" class="profile-pic">
+			</div>
+			<div class="name-bio-wrapper">
+				<h3 class="name text-center scroll-y p-2">{{ profile.first_name }}  {{ profile.last_name }}</h3>
+				<p class="bio-wrapper scroll-y p-2 rounded-border">
+				{{ profile.bio }}
+				</p>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- about this person -->
+
+	<section>
+		<h3 class="mt-4">About this person</h3>
+		<div class="reavealable-info-wrapper p-2 mt-1 border border-3 border-basic rounded-border
+		d-flex flex-wrap scroll-y">
+			{% for info in revealable_info %}
+				<div class="revealable-info m-1 p-1 text-dark border border-1 border-basic rounded-border">
+					{{ info }}
+				</div>
+			{% endfor %}
+		</div>
+		{% if session_user == profile_user %}
+			<a href="{% url 'profile_update' uidb64=uid %}">
+				<div class="transparent-btn edit m-2 mt-3 p-1 px-2">
+					edit profile
+				</div>
+			</a>
+			<a href="{% url 'profile_taste' uidb64=uid %}">
+				<div class="transparent-btn edit m-2 mt-3 p-1 px-2">
+					set taste
+				</div>
+			</a>
+		{% endif %}
+	</section>
+
+	<div class="clr"></div>
+
+
+	<!-- rooms -->
+
+	<section class="mt-4">
+		{% if profile_user == session_user %}
+		<p class="area-title">You will join</p>
+		<div class="mycard-area membered p-3 d-md-flex flex-wrap justify-content-around
+		 rounded-border">
+			{% for room in membered_rooms %}
+				<a href="{% url 'room_info' slug=room.slug %}">
+					<div class="mycard mx-1 mb-2 d-flex pe-auto d-md-block">
+						<div class="mycard-img-wrapper">
+							<img class="mycard-img" src="{{ room.image.url }}" alt="no image"/>
+						</div>
+						<div class="mycard-info-wrapper">
+							<p class="mycard-title mx-1">
+								{{ room.name }}
+							</p>
+							<p class="mycard-description">
+								{{ room.text }}
+							</p>
+						</div>
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+
+		<p class="area-title">Invited</p>
+		<div class="mycard-area invited p-3 d-md-flex flex-wrap justify-content-around
+		 rounded-border">
+			{% for room in invited_rooms %}
+				<a href="{% url 'room_info' slug=room.slug %}">
+					<div class="mycard mx-1 mb-2 d-flex pe-auto d-md-block">
+						<div class="mycard-img-wrapper">
+							<img class="mycard-img" src="{{ room.image.url }}" alt="no image"/>
+						</div>
+						<div class="mycard-info-wrapper">
+							<p class="mycard-title mx-1">
+								{{ room.name }}
+							</p>
+							<p class="mycard-description">
+								{{ room.text }}
+							</p>
+						</div>
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+		{% endif %}
+
+		<p class="area-title">Owned</p>
+		<div class="mycard-area owned p-3 d-md-flex flex-wrap justify-content-around
+		 rounded-border">
+			{% for room in owned_rooms %}
+				<a href="{% url 'room_info' slug=room.slug %}">
+					<div class="mycard mx-1 mb-2 d-flex pe-auto d-md-block">
+						<div class="mycard-img-wrapper">
+							<img class="mycard-img" src="{{ room.image.url }}" alt="no image"/>
+						</div>
+						<div class="mycard-info-wrapper">
+							<p class="mycard-title mx-1">
+								{{ room.name }}
+							</p>
+							<p class="mycard-description">
+								{{ room.text }}
+							</p>
+						</div>
+					</div>
+				</a>
+			{% endfor %}
+		</div>
+	</section>
+
+	
+
+	<div class="space"></div>
+
+</body>
+
+{% endblock content %}
+
+
+
+
+
+
+

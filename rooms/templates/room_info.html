@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Room 
+{% endblock title %}
+
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 'css/room_info.css' %}">
+	<title>Document</title>
+</head>
+<body>
+
+	
+	<!-- main info -->
+	<section>
+		<div class="main-info">
+			<div class="pic-container">
+				<img class="room-pic mw-70 p-2 d-block m-auto" src="{{ room.image.url }}" alt="">
+			</div>
+			<div class="name-text-wrapper">
+				<h3 class="name text-center scroll-y p-2">{{ room.name }}</h3>
+				<div class="time-member-wrapper p-2 my-2 mx-auto border border-3 border-basic rounded-border">
+					<div>{{ num_of_members }} participants</div>
+					<div>Open : {{ room.open_time }}</div>
+					{% if room.reveal_owner %}
+						<div>Owner : <a href="{% url 'profile' uidb64=room.owner.make_uid%}">{{ owner }}</a></div>
+					{% endif %}
+
+				</div>
+				{% if not user.is_anonymous %}
+					<div class="available-action-wrapper mb-4 d-flex flex-content-center flex-wrap">
+						{% for action in actions %}
+							{% if available_action == action %}
+								<a class="d-block mx-auto" href="{% url 'room_action' slug=room.slug uidb64=profile.make_uid action=action %}">
+									<div class="transparent-btn action my-1 mx-auto p-2 {{action}}">
+										{{ action }}
+									</div>
+								</a>
+							{% else %}
+								<a class="d-block mx-auto disabled" href="">
+									<div class="transparent-btn action my-1 mx-auto p-2 {{action}}">
+										{{ action }}
+									</div>
+								</a>
+							{% endif %}
+						{% endfor %}
+					</div>
+				{% endif %}
+				<p class="text-wrapper scroll-y p-2 rounded-border">
+				{{ room.text }}
+				</p>
+			</div>
+		</div>
+	</section>
+
+	
+	<!-- room management for owners -->
+	<section>
+		<form method="post" action="{% url 'room_info' slug=room.slug %}">
+			{% csrf_token %}
+		<div class="account-management d-md-flex flex-wrap">
+			{% if participants %}
+				<div class="account-area roompage-card-area participants-area acccount-area p-3 m-auto justify-content-center
+					rounded-border">
+					{% for account in participants %}
+						<a href="{% url 'profile' uidb64=account.make_uid %}">
+							<input class="check mx-3 mb-1" name="participants" value="{{ account.make_uid }}" type="checkbox">
+							<div class="roompage-card mx-1 mb-4 d-flex pe-auto">
+								
+									<div class="roompage-card-img-wrapper">
+										<img class="roompage-card-img" src="{{ account.avatar.url }}" alt="no image"/>
+									</div>
+									<div class="roompage-card-info-wrapper">
+										<p class="roompage-card-title mx-1">
+											{{ account.first_name }}
+										</p>
+										<p class="roompage-card-description">
+											{{ account.bio }}
+										</p>
+									</div>
+								
+							</div>
+						</a>
+					{% endfor %}
+				</div>
+			{% endif %}
+			{% if applicants %}
+				<div class="account-area roompage-card-area mt-5 participants-area acccount-area p-3 m-auto justify-content-center
+					rounded-border">
+					{% for account in applicants %}
+						<a href="{% url 'profile' uidb64=account.make_uid %}">
+							<input class="check mx-3 mb-1" type="checkbox" name="applicants" value="{{ account.make_uid }}">
+							<div class="roompage-card mx-1 mb-4 d-flex pe-auto">
+								<div class="roompage-card-img-wrapper">
+									<img class="roompage-card-img" src="{{ account.avatar.url }}" alt="no image"/>
+								</div>
+								<div class="roompage-card-info-wrapper">
+									<p class="roompage-card-title mx-1">
+										{{ account.first_name }}
+									</p>
+									<p class="roompage-card-description">
+										{{ account.bio }}
+									</p>
+								</div>
+							</div>
+						</a>
+					{% endfor %}
+				</div>
+			{% endif %}
+		</div>
+			<button type="submit" name="all" value="on">Process all</button>
+			<input class="check mx-3 mb-1" name="test" value="on" type="checkbox">
+		</form>
+	</section>
+
+	<!-- debug -->
+	<section>
+		<div>
+			request : {{ request.GET }}
+			available_action : {{available_action}}
+			p : {{ p }}
+		</div>
+		<div>
+			<a href="{% url 'room_update' slug=room.slug %}">Update this room</a>
+		</div>
+	</section>
+	
+</body>
+{% endblock content %}
+</html>
+
+
+
+
+
+
+<!-- 
+
+<div>
+	<h2>{{ room.name }}</h2>
+</div>
+
+<div>
+	{% if room.joinable is not True %}
+	<h5>※ Sorry the room is already full. If you still want to participate, you can apply to it.</h5>
+	{% endif %}
+</div>
+
+<div>
+	<h4>Description : {{ room.text }}</h4>
+</div>
+
+<div>
+	{% if user.profile != room.owner %}
+		{% if info %}
+			<h4><a href="{% url 'leave_accept_apply' slug=room.slug info=info %}?next={{ request.path }}">{{ info }}</a></h4>
+		{% else %}
+			<h4>Please wait for your result of the application</h4>
+		{% endif %}
+
+	{% else %}
+		<h4> Push accept button names if you approve their participation</h4>
+		{% for applicant in room.applicants.all %}
+			<h4> <a href="{% url 'profile' uidb64=applicant.make_uid %}">{{ applicant.first_name }}</a> : <a href="{% url 'accept_application' slug=room.slug uidb64=applicant.make_uid %}?next={{ request.path }}">accept</a> > </h4>
+		{% endfor %}
+	{% endif %}
+
+	{% if room.max_num %}
+		<h4>Participants : {{ participants_num }} / {{ room.max_num }}</h4>
+	{% else %}
+		<h4>Participants : {{ participants_num }}</h4>
+	{% endif %}
+</div>
+
+<div>
+	<h4>Open (~ close) : {{ room.open_time }} {% if room.close_time %} ~{{ room.close_time }} {% endif %}</h4>
+</div>
+
+<div>
+	{% if room.reveal_owner %}
+		<h4>Owner : <a href="{% url 'profile' uidb64=room.owner.make_uid %}">{{ room.owner.first_name }}</a></h4>
+	{% endif %}
+</div>
+
+<div>
+	<h4>Participants : {{ participants }}</h4>
+	<br>
+	<h4>Invited : {{ invited }}</h4>
+	<br>
+	<h4>Applicants : {{ applicants }}</h4>
+</div>
+
+<div>
+	<a href="{% url 'room_update' slug=room.slug %}">Update this room</a>
+</div>
+
+<div>
+	<h3><a href="{% url 'home' %}">
+		Back to home</a></h3>
+</div>
+ -->

@@ -12,10 +12,8 @@ AGE_CHOICES = tuple(((x, x) for x in AGE_LIST))
 ENGLISH_LEVEL_GENERAL_LISTS = ['Begginer', 'Lower Intermediate', 'Intermediate', 'Upper Intermediate', 'Advanced', 'Almost Native']
 ENGLISH_LEVEL_GENERAL_CHOICES = tuple(((x, x) for x in ENGLISH_LEVEL_GENERAL_LISTS))
 
-SEX_CHOICES = (
-	('Male', 'Male'),
-	('Female', 'Female'),
-	)
+SEX_LIST = ['Female', 'Male']
+SEX_CHOICES = tuple(((x, x) for x in SEX_LIST))
 
 PUNCTUALITY_LIST = ['below 5 mins late', 'below 10 mins late', 'below 15 mins late', 'below 30 mins late']
 PUNCTUALITY_CHOICES = (
@@ -29,11 +27,26 @@ PUNCTUALITY_CHOICES = (
 POLITENESS_CHIOCES=(
 		('3', 'polite'),
 		('2', 'normal'),
-		('1', 'a bit inpolite'),
-		('0', 'inpolite'), 
+		('1', 'a bit impolite'),
+		('0', 'impolite'), 
 	)
 
 IELTS_SCORE_LISTS = ['3.5', '4', '4.5' ,'5', '5.5', '6', '6.5', '7', '7.5', '8', '8.5', '9']
 IELTS_SCORE_CHOICES = tuple(((x, x) for x in IELTS_SCORE_LISTS))
 TOEFL_SCORE_LISTS = ['60', '65', '70', '75', '80', '85', '90', '95', '100', '105', '110', '115', '120']
 TOEFL_SCORE_CHOICES = tuple(((x, x) for x in TOEFL_SCORE_LISTS))
+
+
+# tags, footprints
+TAG_LIST = ['General', 'Sports', 'Tech', 'Religion', 'Lifestyle', 
+'Study', 'Dream', 'Personality', 
+'Culture',]
+TAG_CHOICES = tuple(((x, x) for x in TAG_LIST))
+FOOTPRINT_LISTS = ['login' ,'search', 'profile_page', 'room_page', 'join',]
+FOOTPRINT_CHOICES = tuple(((x, x) for x in FOOTPRINT_LISTS))
+
+PURPOSE_LIST = ['IELTS', 'CAE', 'CPE', 'TOEIC', 
+'Linguaskill (Bulats)', 'PTE', 'TOEFL', 
+'DET (Duolingo English Test)', 'job interview practice', 
+'conversation practice', ]
+PURPOSE_CHOICES = tuple(((x, x) for x in PURPOSE_LIST))

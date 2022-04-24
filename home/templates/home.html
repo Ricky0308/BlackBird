@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+</head>
+<body>
+
+	<div class="initial-space d-md-none"></div>
+	<button class="d-md-none transparent-btn start-search" onclick="toggleElement()">
+		Search Rooms and People
+	</button>
+	
+	<!-- Search form -->
+	<section>
+		<div id="search-form-container" class="search-form-container d-none d-md-block">
+			<i class="bi bi-x-square d-md-none" onclick="toggleElement()"></i>
+			<form class="search-form" action="{% url 'home' %}" method="get">
+
+				<div class="free-word-wrapper">
+					<label for="free-word"><b>free word</b></label>
+					{{ search_form.q }}
+					<button class="btn" type="submit">Search</button>
+				</div>
+
+				<div class="clr"></div>
+
+				<div class="search-area-space"></div>
+				<label for="room-or-people"><b>Search people</b></label>
+				<div class="element-wrapper room-or-people select-multiple">
+					{% for x in search_form.kind %}
+						{{ x }}
+					{% endfor %}
+				</div>
+
+				<div class="search-area-space"></div>
+				<label for="date"><b>room schedule</b></label>
+				<div class="element-wrapper date">
+					<div>
+					<p>from</p>
+						{{ search_form.date_from }}
+					</div>
+					<div>
+					<p>to</p>
+						{{ search_form.date_to }}
+					</div>
+				</div>
+
+				<div class="search-area-space"></div>
+				<label for="country"><b>country</b></label>
+				<div class="element-wrapper select-multiple country">
+				{% for x in search_form.country %}
+					<div class='each-country'>
+						{{ x }}
+					</div>
+				{% endfor %}
+				</div>
+
+				<div class="search-area-space"></div>
+				<label for="sex"><b>sex</b></label>
+				<div class="element-wrapper select-multiple sex">
+					{% for x in search_form.sex %}
+					<div class='each-sex'>
+						{{ x }}
+					</div>
+					{% endfor %}
+				</div>
+
+				<div class="search-area-space"></div>
+				<label for="age"><b>age</b></label>
+				<div class="element-wrapper select-multiple age">
+					{% for x in search_form.age %}
+					<div class='each-age'>
+						{{ x }}
+					</div>
+					{% endfor %}
+				</div>
+
+				<div class="search-area-space"></div>
+				<label for="punctuality"><b> average punctuality</b></label>
+				<div class="element-wrapper select-multiple punctuality">
+					{% for x in search_form.punctuality %}
+					<div class='each-punctuality'>				
+						{{ x }}
+					</div>
+					{% endfor %}
+				</div>
+
+				<div class="search-area-space"></div>
+				<label for="punctuality"><b>Purpose</b></label>
+				<div class="element-wrapper select-multiple purpose">
+					{% for x in search_form.purpose %}
+					<div class='each-age'>
+						{{ x }}
+					</div>
+					{% endfor %}
+				</div>
+
+				<div class="search-area-space"></div>
+				<label for="others"><b>others</b></label>
+				<div class="element-wrapper select-multiple others">
+					<div>
+						{% for x in search_form.follow %}
+							{{ x }}
+						{% endfor %}
+					</div>
+					<div>
+						{% for x in search_form.active %}
+							{{ x }}
+						{% endfor %}
+					</div>
+					<div>
+						{% for x in search_form.invited %}
+							{{ x }}
+						{% endfor %}
+					</div>
+					<div>
+						{% for x in search_form.no_apply %}
+							{{ x }}
+						{% endfor %}
+					</div>
+				</div>
+
+				<div class="search-area-space"></div>
+				<label for="ielts"><b>IELTS (certified)</b></label>
+				<div class="element-wrapper select-multiple ielts english">
+					{% for x in search_form.ielts %}
+					<div class='each-ielts'>				
+						{{ x }}
+					</div>
+					{% endfor %}
+				</div>
+
+				<div class="search-area-space"></div>
+				<label for="toefl"><b>TOEFL (certified)</b></label>
+				<div class="element-wrapper select-multiple toefl english">
+					{% for x in search_form.toefl %}
+					<div class='each-toefl'>				
+						{{ x }}
+					</div>
+					{% endfor %}
+				</div>
+
+				<div class="search-area-space"></div>
+				<div class="btn-flex">
+					<button class="btn search" type="submit">Search</button>
+					<button name="reset" value="on" class="btn reset" type="submit">Reset</button>
+				</div>
+			</form>
+		</div>
+	</section>
+
+	<!-- search results -->
+
+
+	<section>
+		<div class="result-area mycard-area p-3 d-md-flex flex-wrap justify-content-center
+			rounded-border">
+			{% if people %} 
+				{% for account in search_result %}
+					<a href="{% url 'profile' uidb64=account.make_uid %}">
+						<div class="mycard mx-1 mb-2 d-flex pe-auto d-md-block">
+							<div class="mycard-img-wrapper">
+								<img class="mycard-img" src="{{ account.avatar.url }}" alt="no image"/>
+							</div>
+							<div class="mycard-info-wrapper">
+								<p class="mycard-title mx-1">
+									{{ account.first_name }}
+								</p>
+								<p class="mycard-description">
+									{{ account.bio }}
+								</p>
+							</div>
+						</div>
+					</a>
+				{% endfor %}
+			{% else %}
+				{% for room in search_result %}
+					<a href="{% url 'room_info' slug=room.slug %}">
+						<div class="mycard mx-1 mb-2 d-flex pe-auto d-md-block">
+							<div class="mycard-img-wrapper">
+								<img class="mycard-img" src="{{ room.image.url }}" alt="no image"/>
+							</div>
+							<div class="mycard-info-wrapper">
+								<p class="mycard-title mx-1">
+									{{ room.name }}
+								</p>
+								<p class="mycard-description">
+									{{ room.text }}
+								</p>
+							</div>
+						</div>
+					</a>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</section>
+
+
+	<dev>
+		{% if user.is_authenticated %}
+			<a href="{% url 'logout' %}">
+			Logout</a>
+			<a href="{% url 'password_reset' %}">
+			Change password</a> 
+		{% else %}
+			<a href="{% url 'signup' %}">
+			Sign up</a>
+			<a href="{% url 'login' %}">
+			Login</a>
+			
+		{% endif %}
+		<dev>
+			<br>
+			<h5>request.GET : {{ re }}</h5> 
+			<br>
+			<h3><a href="{% url 'exp' %}">exp</a></h3>
+		</dev>
+	</dev>
+
+
+	<!-- <script src="{% static 'js/main.js' %}"></script> -->
+</body>
+</html>
+
+
+{% endblock content %}

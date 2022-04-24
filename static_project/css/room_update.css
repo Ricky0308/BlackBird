@@ -1,0 +1,226 @@
+
+*{
+	box-sizing: border-box;
+	font-family: monospace, monospace;
+	color: rgba(177, 177, 177, .8);
+}
+
+body{
+	background-color: rgba(22, 27, 34, .97);
+}
+
+*::-webkit-scrollbar{
+	width: 7px;
+	background: rgba(0, 0, 0, 0);
+	border-radius: 8px;
+}
+*::-webkit-scrollbar-thumb{
+	background-color: rgba(177, 177, 177, .25);
+	border-radius: 8px;
+}
+
+.clr{
+	clear: both;
+}
+
+a{
+	color: rgba(4, 104, 255, .7);
+}
+
+a:hover{
+	text-decoration: none;
+	color: rgba(4, 104, 255, .4);
+}
+
+.space{
+	height: 70px;
+}
+
+.space20{
+	height: 20px;
+}
+
+/********************************************************/
+
+
+.title{
+	padding: 0 10px;
+	margin-bottom: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 500px;
+
+	border-radius: 8px;
+	border: solid 2px rgba(229, 248, 59, .6);
+	background-color: rgba(229, 248, 59, .1);
+	color: rgba(229, 248, 59, .6);
+	font-size: 30px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.title:hover{
+	color: rgba(229, 248, 59, .3);
+	border: solid 2px rgba(229, 248, 59, .3);
+	background-color: rgba(229, 248, 59, .05);
+}
+
+.success{
+	font-size: 30px;
+	margin-bottom: 30px;
+	color: rgba(229, 248, 59, .8);
+}
+
+.required{
+	color: red;
+	font-size: 12px;
+}
+
+.form-wrapper{
+	margin: auto;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	padding: 50px 100px;
+	padding-bottom: 50px;
+
+	text-align: center;
+	border-radius: 8px;
+	border: solid 2px;
+	border-color: rgba(229, 248, 59, .8);
+	box-shadow: 0px 0px 10px 0px rgba(229, 248, 59, .8);
+	width: 70%;
+	background-color: rgba(0, 0, 0, .5);
+}
+
+
+.element-wrapper{
+	margin-bottom: 30px;
+
+
+	text-align: center;
+	font-weight: 700;
+}
+
+.element-wrapper input{
+	padding: 10px;
+	margin: auto;
+	color: rgba(255, 255, 255, .8);
+	background-color: rgba(255, 255, 255, .05);
+	border: solid .2px rgba(255, 255, 255, .3);
+	border-radius: 8px;
+}
+
+.name-wrapper{
+	margin-bottom: 10px;
+	text-align: center;
+	font-size: 20px;
+}
+
+textarea{
+	padding: 10px;
+
+	color: rgba(255, 255, 255, .8);
+	max-width: 100%;
+	background-color: rgba(255, 255, 255, .05);
+	border-radius: 8px;
+	overflow-x: hidden;
+}
+
+textarea::-webkit-scrollbar-thumb{
+	background-color: rgba(0, 0, 0, .4);
+}
+
+.check{
+	width: 20px;
+	height: 20px;
+}
+
+select{
+	margin-top: 10px;
+	color: rgba(255, 255, 255, .8);
+	background-color: rgba(255, 255, 255, .05);
+	border-radius: 8px;
+	width: 50px;
+	height: 30px;
+}
+
+.element-wrapper p{
+	margin-bottom: 0;
+	background-color: ;
+}
+
+.picture-wrapper{
+	margin-bottom: 10px;
+}
+
+.invited-wrapper{
+	padding: 10px;
+	
+	background-color: rgba(255, 255, 255, .05);
+	border: solid .2px rgba(255, 255, 255, .3);
+	border-radius: 8px;
+	max-height: 150px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.invited-wrapper input, .checkbox-wrapper input{
+	width: 20px;
+	height: 20px;
+}
+
+.invited-wrapper label{
+	float: left;
+}
+
+.room-image-wrapper{
+	margin: 10px 0;
+	margin-right: auto;
+	margin-left: auto;
+	max-width: 500px;
+}
+
+.room-image{
+	max-width: 100%;
+	border-radius: 8px;
+}
+
+
+.space2{
+	height: 50px;
+}
+
+.btn-wrapper{
+	text-align: center;
+}
+
+.btn{
+	padding: 0 3px;
+
+	font-size: 26px;
+	font-weight: 600;
+	color: rgba(45, 112, 255, 1);
+	border: solid 2px ;
+	border-color: rgba(45, 112, 255, 1);
+	background-color: rgba(0, 81, 255, .3);
+	border-radius: 8px;
+}
+
+.btn:hover{
+	color: rgba(36, 88, 199, 1);
+	border-color:  rgba(36, 88, 199);
+	background-color: rgba(0, 81, 255, .1);
+}
+
+
+
+.form-wrapper label{
+	color: rgba(177, 177, 177, .8);
+}
+
+
+
+
+
+

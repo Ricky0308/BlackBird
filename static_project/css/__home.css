@@ -1,0 +1,134 @@
+
+body{}
+
+@media screen and (min-width: 768px){
+	body{
+		padding-right: 150px;
+	}
+}
+
+/* @media screen and (min-width: 1024px){
+}
+
+@media screen and (min-width: 768px){
+	.search-form-container{
+		width: 20%;
+	}
+} */
+
+.search-area-space{
+	height: 20px;
+}
+
+.search-form-container{
+	width: 200px;
+	position: absolute;
+	top: 56px;
+	right: 0px;
+	padding: 10px;
+
+	background-color: rgba(255, 255, 255, .2);
+	border-bottom-right-radius: 8px;
+	border-bottom-left-radius: 8px;
+	overflow-y: scroll;
+	font-size: 15px;
+	color: rgba(0, 0, 0, 1);
+}
+
+.search-form-container *::-webkit-scrollbar-thumb{
+	background-color: rgba(50, 50, 50, .9);
+	border-radius: 10px;
+}
+
+.search-form-container .btn{
+	margin-top: 10px;
+	float: right;
+	display: block;
+	padding: 0px 10px;
+	text-align: center;
+
+	color: rgba(177, 177, 177, .8);
+	height: 30px;
+	background-color: rgba(19, 101, 255, .8);
+	box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, .9);
+	border-radius: 10px;
+}
+
+.search-form-container .reset{
+	background-color: rgba(255, 74, 19, .45);
+	color: rgba(0, 0, 0, .8);
+}
+
+.search-form-container .btn:hover{
+	background-color: rgba(19, 101, 255, .4);
+}
+.search-form-container .reset:hover{
+	background-color: rgba(255, 74, 19, .27);
+}
+
+
+.free-word-wrapper input{
+	color: rgba(0,0,0, .9);
+	margin: auto ;
+	padding: 5px;
+	display: block;
+	border: solid 0px;
+	border-radius: 8px;
+	width: 100%;
+}
+
+
+.element-wrapper{
+	padding: 8px;
+
+	overflow-y: scroll;
+	border-radius: 8px ;
+	background-color: rgba(255, 255, 255, .3);
+	/*max-width: 220px;*/
+	max-height: 200px;
+}
+
+.element-wrapper p{
+	margin-bottom: 0px;
+	margin-left: 5px;
+	color: rgba(0, 0, 0, .65);
+}
+
+.select-multiple input {
+	width: 20px;
+	height: 20px;
+}
+
+.check{
+	width: 20px;
+	height: 20px;
+}
+
+.date::-webkit-scrollbar{
+	width: 3px;
+}
+
+.date input{
+	width: 100%;
+}
+
+.btn-flex{
+	display: flex;
+	flex-direction: row-reverse;
+	flex-wrap: wrap;
+}
+
+.btn-flex .btn{
+	margin: 5px;
+}
+
+
+/* search results **********************/
+
+.result-area{
+	max-height: none;
+	/* background-color: inherit; */
+}
+
+
+

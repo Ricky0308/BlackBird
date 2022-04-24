@@ -1,0 +1,136 @@
+
+/* main info */
+.text-wrapper{
+    max-height: 300px;
+}
+
+.room-pic{
+    max-width: 200px;
+    border-radius: 50%;
+}
+
+.name{
+    max-height: 70px;
+}
+
+.action{
+    width: 30vw;
+    text-align: center;
+    font-size: large;
+}
+
+.disabled{
+    pointer-events: none;
+    opacity: .1;
+}
+
+.cancel,.leave{
+    color: rgba(199, 82, 36, .7);
+    border-color: rgba(199, 82, 36, .7);
+    background-color: rgba(199, 82, 36, .2);
+}
+
+.cancel:hover{
+    color: rgba(199, 82, 36, .3);
+	border-color:  rgba(199, 82, 36, .3);
+	background-color: rgba(199, 82, 36, .08)
+}
+
+.leave:hover{
+    color: rgba(199, 82, 36, .3);
+	border-color:  rgba(199, 82, 36, .3);
+	background-color: rgba(199, 82, 36, .08)
+}
+
+/* basic info */
+
+.time-member-wrapper{
+
+    width: fit-content;
+    max-height: 200px;
+    min-height: 50px;
+}
+
+/* room management for owners */
+
+.area-title{
+    margin-top: 5%;
+    margin-left: 5%;
+    font-size: large;
+    font-weight: 550;
+}
+
+.roompage-card-area{
+    background-color: rgba(1, 4, 9, .7);
+    overflow-y: scroll;
+    width: 100%;
+    max-width: 750px;
+    max-height: 1000px;
+}
+
+
+.roompage-card{
+    height: 90px;
+    background-color: rgba(200, 200, 200, .03);
+}
+
+.roompage-card:hover{
+    background-color: rgba(200, 200, 200, .06);
+}
+
+.link-div{
+    background-color: royalblue;
+}
+
+.roompage-card-img-wrapper{
+    aspect-ratio: 8 / 5;
+    display: flex;
+    justify-content: center;
+}
+
+.roompage-card-img{
+    max-width: 100%;
+}
+
+.roompage-card-info-wrapper{
+    overflow: hidden;
+    background-color: royalblue;
+}
+
+.roompage-card-title{
+    font-size: 17px;
+    margin-top: 4px;
+    padding: 0 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.roompage-card-description{
+    max-height: 50px;
+    margin-top: -11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 1rem ;
+}
+
+.check{
+    cursor: pointer;
+    height: 22px;
+    width: 22px;
+}
+
+
+@media screen and (min-width: 768px){
+    .roompage-card-area{
+        height: 500px;
+        min-height: 200px;
+    }
+}
+
+
+
+
+
+
+
+

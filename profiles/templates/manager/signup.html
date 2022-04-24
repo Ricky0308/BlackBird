@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Sign up
+{% endblock title %}
+
+{% block content %}
+
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
+</head>
+<body class="">
+
+	<h2>Sign up</h2>
+
+	<form method="post">
+		{% csrf_token %}
+		<div class="form-wrapper mx-auto text-center">
+			<div>
+				{% for i in top %}
+					<div class="error-message">{{ i }}</div>
+				{% endfor %}
+				<p class="mb-0 ">First name</p>
+				{% for i in first_name %}
+					<div class="error-message">{{ i }}</div>
+				{% endfor %}
+				{{ profile_form.first_name }}
+			</div>
+			<div>
+				<p class="mb-0 ">Last name</p>
+				{% for i in last_name %}
+					<div class="error-message">{{ i }}</div>
+				{% endfor %}
+				{{ profile_form.last_name }}
+			</div>
+			<div>
+				<p class="mb-0">Country</p>
+				{% for i in country %}
+					<div class="error-message">{{ i }}</div>
+				{% endfor %}
+				{{ profile_form.country }}
+			</div>
+
+			<div>
+				<p class="mb-0 ">email address</p>
+				{% for i in email %}
+					<div class="error-message">{{ i }}</div>
+				{% endfor %}
+				{{ user_form.email }}
+			</div>
+			<div>
+				<p class="mb-0 ">Password</p>
+				{% for i in password2 %}
+					<div class="error-message">{{ i }}</div>
+				{% endfor %}
+				{{ user_form.password1 }}
+			</div>
+			<div>
+				<p class="mb-0 ">Password (confirm)</p>
+				{{ user_form.password2 }}
+			</div>
+			<button class="transparent-btn p-2" type="submit">Register</button>
+		</div>
+		<div class="space"></div>
+	</form>
+
+</body>
+
+{% endblock content %}

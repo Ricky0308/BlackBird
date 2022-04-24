@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+BB - Profile Taste
+{% endblock title %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile_update.css' %}">
+
+</head>
+<body>
+	<div class="space"></div>
+	<div class="name-wrapper">
+		<a href="{% url 'profile' uidb64=uid %}">{{ profile.first_name }} {{ profile.last_name }}</a>
+	</div>
+
+	<div class="current-info-wrapper">
+		<div class="message">Tags</div>
+		<div class="current-info">
+			{% if tags %}
+				{% for tag in tags %}
+					<div class="info-elem">
+						{{ tag.name }}
+					</div>
+				{% endfor %}
+			{% else %}
+				<div class="info-elem">
+					No Tag
+				</div>
+			{% endif %}
+		</div>
+		<div class="space30"></div>
+		<div class="message">Target People</div>
+		<div class="current-info">
+			{% if target_list %}
+				{% for elem in target_list %}
+					<div class="info-elem">
+						{{ elem }}
+					</div>
+				{% endfor %}
+			{% else %}
+				<div class="info-elem">
+					No feature
+				</div>
+			{% endif %}
+		</div>
+		<div class="space30"></div>
+		{% for message in success_messages %}
+			<div class="info-elem success-elem">
+					{{ message }}
+			</div>
+		{% endfor %}
+		{% for message in error_messages %}
+			<div class="info-elem error-elem">
+					{{ message }}
+			</div>
+		{% endfor %}
+	</div>
+
+	<form class="taste-form" method="post" enctype="multipart/form-data" action="{% url 'profile_taste' uidb64=uid %}">{% csrf_token %}
+		<div class="purposeform-wrapper form-wrapper">
+			<div class="form-title">Purpose</div>
+			<div class="top-message message">
+				Why use this paltform?
+			</div>
+			{{ purposeform.purpose }}
+		</div>
+
+		<div class="tagform-wrapper form-wrapper">
+			<div class="form-title">Tags</div>
+
+			{% if tag_max_error %}
+				<div class="error message">{{ tag_max_error }}</div>
+			{% else %}
+				<div class="message top-message">You can chose <span>{{ allowed_tags_num }}</span> more tags. (Up to {{ tags_max_num }} tags in total)</div>
+			{% endif %}
+			<div class="message">General</div>
+			<div class="scroll-wrapper">
+				{% for item in tagform.general %}
+					{{ item }}
+				{% endfor %}
+			</div>
+			<div class="message">Sports</div>
+			<div class="scroll-wrapper detailed">
+				{% for item in tagform.sports %}
+					{{ item }}
+				{% endfor %}
+			</div>
+			<div class="message">Study</div>
+			<div class="scroll-wrapper detailed">
+				{% for item in tagform.study %}
+					{{ item }}
+				{% endfor %}
+			</div>
+			<div class="message">Tech</div>
+			<div class="scroll-wrapper detailed">
+				{% for item in tagform.tech %}
+					{{ item }}
+				{% endfor %}
+			</div>
+			<div class="message">Religion</div>
+			<div class="scroll-wrapper detailed">
+				{% for item in tagform.religion %}
+					{{ item }}
+				{% endfor %}
+			</div>
+			<div class="message">Lifestyle</div>
+			<div class="scroll-wrapper detailed">
+				{% for item in tagform.lifestyle %}
+					{{ item }}
+				{% endfor %}
+			</div>
+			<div class="message">Personality</div>
+			<div class="scroll-wrapper detailed">
+				{% for item in tagform.personality %}
+					{{ item }}
+				{% endfor %}
+			</div>
+
+		</div>
+
+		<div class="targetform-wrapper form-wrapper">
+			<div class="form-title">Target People</div>
+			<div class="message top-message">What kind of people do you want to be connected?</div>
+			{% if country_error %}
+				<div class="error message">{{ country_error }}</div>
+			{% else %}
+				<div class="message">Country : max 5</div>
+			{% endif %}
+			<div class="scroll-wrapper">
+				{% for x in targetform.country %}
+					{{x}}
+				{% endfor %}
+			</div>
+
+			{% if age_error %}
+				<div class="error message">{{ age_error }}</div>
+			{% else %}
+				<div class="message">Age : max 2</div>
+			{% endif %}
+			<div class="scroll-wrapper">
+				{% for x in targetform.age %}
+					{{x}}
+				{% endfor %}
+			</div>
+
+			{% if sex_error %}
+				<div class="error message">{{ sex_error }}</div>
+			{% else %}
+				<div class="message">Sex : max 1</div>
+			{% endif %}
+			<div class="scroll-wrapper">
+				{% for x in targetform.sex %}
+					{{x}}
+				{% endfor %}
+			</div>
+		</div>
+		<button class="btn taste-btn" type="submit">set</button>
+	</form>
+	<div class="clr"></div>
+	<div class="space"></div>
+
+	<h2><a href="{% url 'home' %}">　　Back to home</a></h2>
+
+	<div class="space"></div>
+	<div class="space"></div>
+	<div class="space"></div>
+</body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}
+Review 
+{% endblock title %}
+
+
+{{ review }}
+
+
+{% block content %}
+
+<p>This page is for {{ review }}</p>
+<a href="{% url 'home' %}">Home</a>
+<br/>
+
+{% for x in all_review %}
+
+	<a href='{% url "show_review" slug=x.slug%}'>{{ x }}</a>
+{% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,53 @@
+/* basic info ****************************/
+
+
+.bio-wrapper{
+    max-height: 300px;
+}
+
+.profile-pic{
+    max-width: 200px;
+    border-radius: 50%;
+}
+
+
+.name{
+    max-height: 70px;
+}
+
+
+
+/* about this person **********************/
+
+.reavealable-info-wrapper{
+    max-height: 200px;
+}
+
+.revealable-info{
+    background-color: rgba(245, 242, 73, 0.7);
+    box-shadow: 1px 1px 3px 0px rgba(158, 157, 102, .5);
+}
+
+.edit{
+    display: inline;
+    float: right;
+}
+
+/* rooms *********************************/
+/* since rooms and room areas are reusable elements,
+they are in base.css */
+
+.membered{
+	position: relative;
+	box-shadow: 0px 0px 10px 0px rgba(255, 0, 0, 0.5);
+}
+
+.owned{
+	position: relative;
+	box-shadow: 0px 0px 10px 0px rgb(22, 96, 255);
+}
+
+.invited{
+	position: relative;
+	box-shadow: 0px 0px 10px 0px rgba(255, 251, 0, .6);
+}

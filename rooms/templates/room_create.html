@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Room create
+{% endblock title %}
+
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/room_create.css' %}">
+
+</head>
+<body>
+	<div class="form-wrapper">
+		<p class="title">Create your own room!</p>
+		<form method="post" enctype="multipart/form-data">{% csrf_token %}
+			<div class="element-wrapper name-wrapper">
+				<p>Title</p>
+				<p class="required">(required)</p>
+				{{ form.name }}
+			</div>
+			<div class="element-wrapper text-wrapper">
+				<p>Room Dscription</p>
+				<p class="required">(required)</p>
+				{{ form.text }}
+			</div>
+			<div class="element-wrapper schedule-wrapper">
+				<p>Open time</p>
+				<p class="required">(required)</p>
+				{{ form.open_time }}
+				<!-- <div class="space20"></div>
+				<p>Close time</p>
+				{{ form.close_time }} -->
+			</div>
+			<div class="element-wrapper member-wrapper">
+				<p>Max number of members</p>
+				{{ form.max_num }}
+			</div>
+			<div class="element-wrapper checkbox-wrapper">
+				{{ form.no_apply }}
+				No need to apply?
+			</div>
+			<div class="element-wrapper checkbox-wrapper">
+				{{ form.reveal_owner }}
+				Reveal your name as the owner?
+			</div>
+			<h5>People you want to invite</h5>
+			<div class="element-wrapper invited-wrapper">
+				{% for x in form.invited %}
+					{{ x }}
+				{% endfor %}
+			</div>
+			<div class="element-wrapper image-wrapper">
+				<p>Room image</p>
+				{{ form.image }}
+			</div>
+
+			<div class="btn-wrapper">
+				<button class="btn" type="submit">Create</button>
+			</div>
+			<div class="clr"></div>
+		</form>
+	</div>
+
+<h2 style="color: orange;">{{ check }}</h2>
+<div class="space"></div>
+<h2 style="color: orange;">{{ check2 }}</h2>
+
+<div>
+	<h3><a href="{% url 'home' %}">
+		Bakc to home</a></h3>
+</div>
+
+</body>
+
+{% endblock content %}
