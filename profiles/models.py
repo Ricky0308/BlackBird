@@ -237,11 +237,13 @@ class Tag(models.Model):
 		return f'{self.id} {self.kind} ({self.name})'
 
 
+
 class Review(models.Model):
 	slug = models.SlugField(
 		unique=True, 
 		blank=True
 	)
+	filled = models.BooleanField(default=False)
 	reviewee = models.ForeignKey(
 		Profile, 
 		related_name='reviewee', 
@@ -252,19 +254,6 @@ class Review(models.Model):
 		related_name='reviewer', 
 		on_delete=models.CASCADE
 	)
-	review_title = models.CharField(
-		max_length=100, 
-		blank=True
-	)
-	review_text = models.TextField(
-		max_length=1000, 
-		blank=True
-	)
-	warning_title = models.CharField(
-		max_length=100, 
-		blank=True, 
-		null=True
-	)
 	warning_text = models.TextField(
 		max_length=1000, 
 		null=True, 
@@ -272,12 +261,6 @@ class Review(models.Model):
 	)
 	punctuality = models.CharField(
 		choices=PUNCTUALITY_CHOICES, 
-		max_length=100, 
-		blank=True, 
-		null=True
-	)
-	politeness = models.CharField(
-		choices=POLITENESS_CHIOCES, 
 		max_length=100, 
 		blank=True, 
 		null=True

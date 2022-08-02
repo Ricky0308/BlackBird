@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 from django.contrib.auth.models import User
 from importlib_metadata import email
-from .models import Profile, Tag, Target
+from .models import Profile, Tag, Target, Review
 from django.forms import ModelForm
 from django import forms
 from django.forms import models
@@ -100,6 +100,10 @@ class TargetForm(forms.ModelForm):
 			)
 		
 
+class Reviewform(models.ModelForm):
+	class Meta:
+		model = Review
+		exclude = []
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -144,10 +148,3 @@ class EmailAuthenticationForm(AuthenticationForm):
 		return self.cleaned_data
 
 	
-
-
-
-class MyForm(forms.Form):
-	a_filed = forms.EmailField(
-		widget=forms.EmailInput(
-			attrs={'class':'black-input'}))
