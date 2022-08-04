@@ -1,2 +1,4 @@
 exp/
+.vscode
 bb2/.env
+.DS_Store
