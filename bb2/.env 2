@@ -1,0 +1,5 @@
+EMAIL_HOST=smtp.gmail.com
+EMAIL_HOST_USER=blackbird.system1@gmail.com
+EMAIL_HOST_PASSWORD=chrbnpbmlgzvwyon
+RECIPIENT_ADDRESS=ryosuke0308@akane.waseda.jp
+SECRET_KEY=django-insecure-kh(e)%3ywxod5enfz1c+70o%4q48odo$phz-nvdyi64*e=!v3s
