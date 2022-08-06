@@ -4,10 +4,12 @@ from django.core.exceptions import ValidationError
 from django.template.defaultfilters import slugify 
 import uuid
 from .utils import get_random_code, tz_list
+from django.utils.deconstruct import deconstructible
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.translation import gettext_lazy as _
 from django.template.defaultfilters import slugify 
+
 
 from rooms.utils import get_random_code
 from bb2.lists import (COUNTRY_CHOICES, COUNTRY_LIST, SEX_CHOICES, 
@@ -18,7 +20,7 @@ from bb2.lists import (COUNTRY_CHOICES, COUNTRY_LIST, SEX_CHOICES,
 	PURPOSE_CHOICES)
 
 import datetime
-
+from typing import Union
 from collections import Iterable
 
 # Create your models here.
@@ -75,9 +77,6 @@ class StringListField(models.TextField):
 		if not self.blank and values in self.empty_values:
 			raise ValidationError(self.error_messages["blank"], code="blank")
 
-				
-
-
 	def get_prep_value(self, value):
 		if not value:
 			return 
@@ -93,20 +92,20 @@ class StringListField(models.TextField):
 			return 
 		return ','.join(value)
 
-
-class MultipleChoiceableCharField(models.CharField):
-	# allows using MultipleChoiceField for form
-	# but chosing only onw value is allowed
-	# raise ValidationError(_('Unreasonable error : from MultipleChoiceableCharField to_python'))
-	def to_python(self, value):
-		if isinstance(value, (list, tuple)):
-			if len(value) > 1:
-				raise ValidationError(_('only one value is allowed'))
-			elif len(value) == 0:
-				return 
-			else:
-				value = value[0]
-		return super().to_python(value)
+#### not using anymore
+# class MultipleChoiceableCharField(models.CharField):
+# 	# allows using MultipleChoiceField for form
+# 	# but chosing only onw value is allowed
+# 	# raise ValidationError(_('Unreasonable error : from MultipleChoiceableCharField to_python'))
+# 	def to_python(self, value):
+# 		if isinstance(value, (list, tuple)):
+# 			if len(value) > 1:
+# 				raise ValidationError(_('only one value is allowed'))
+# 			elif len(value) == 0:
+# 				return 
+# 			else:
+# 				value = value[0]
+# 		return super().to_python(value)
 		# 	raise ValidationError(_(f'{value}: from validate'))
 		
 	
@@ -143,7 +142,6 @@ class Profile(models.Model):
 	next_sex_reason = models.TextField(default=None, max_length=1000, null=True, blank=True)
 	next_age_reason = models.TextField(default=None, max_length=1000, null=True, blank=True)
 
-
 	# English level
 	toefl = models.CharField(choices=TOEFL_SCORE_CHOICES, max_length=200, blank=True, null=True)
 	ielts = models.CharField(choices=IELTS_SCORE_CHOICES, max_length=200, blank=True, null=True)
@@ -177,35 +175,85 @@ class Profile(models.Model):
 	def __str__(self):
 		return f'{self.first_name} {self.last_name}'
 
+@deconstructible
+class ChoiceValidator:
+	"""A class-based validator for Target's fields.
+	Raise ValidationError if values are not in valid choice list. 
+	"""
+	def __init__(self, choice:list):
+		self.choice = choice
+
+	def __call__(self, value:Union[list, str]):
+		if isinstance(value, str):
+			value = [value]
+		for v in value:
+			if not v in self.choice:
+				raise ValidationError(
+				_('%(value)s is invalid'),
+				params={'value': value},
+			)
+	
+	def __eq__(self, other):
+		return (
+			isinstance(other, ChoiceValidator)
+			and self.choice == other.choice
+		)
+
 
 class Target(models.Model):
 	profile = models.OneToOneField(
 		Profile, 
 		on_delete=models.CASCADE
 	)
-	country = StringListField(
-		valid_choices = COUNTRY_LIST,
+
+	country=models.JSONField(
+		default=list,
+		validators=[ChoiceValidator(COUNTRY_LIST)],
 		blank=True, 
-		null=True,
 	)
-	sex = StringListField(
-		valid_choices = SEX_LIST,
+	sex = models.JSONField(
+		default=list,
+		validators = [ChoiceValidator(SEX_LIST)],
 		blank=True, 
-		null=True
 	)
-	age = StringListField(
-		valid_choices = AGE_LIST,
+	age = models.JSONField(
+		default=list,
+		validators = [ChoiceValidator(AGE_LIST)],
 		blank=True, 
-		null=True,
 	)
+
+	##### OLD VERSION
+	#####
+	# country = StringListField(
+	# 	valid_choices = COUNTRY_LIST,
+	# 	blank=True, 
+	# 	null=True,
+	# )
+	# sex = StringListField(
+	# 	valid_choices = SEX_LIST,
+	# 	blank=True, 
+	# 	null=True
+	# )
+	# age = StringListField(
+	# 	valid_choices = AGE_LIST,
+	# 	blank=True, 
+	# 	null=True,
+	# )
+	# test = models.JSONField(default=list, validators=[ChoiceValidator(["1", "2"])])
+	
+	
 	def __str__(self):
 		return f'{self.profile}'
 
+	##### OLD VERSION
+	#####
 	def make_dict(self):
 		# customized model_to_dict() 
 		field_names = [x.name for x in Target._meta.fields]
 		return {x:getattr(self, x) for x in field_names}
 
+	##### OLD VERSION 
+	#####
 	def value_list(self):
 		# return a generator containing all values except for id and profile
 		exclude = ['id', 'profile']
