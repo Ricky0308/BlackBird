@@ -1,3 +1,5 @@
 exp/
-bb2/.env
 memo.txt
+.vscode
+bb2/.env
+.DS_Store
