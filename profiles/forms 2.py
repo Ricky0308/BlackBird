@@ -1,11 +1,9 @@
 from xml.dom import ValidationErr
-from attr import fields
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 from django.contrib.auth.models import User
 from importlib_metadata import email
 from .models import Profile, Tag, Target, Review
-from django.forms import ModelForm
 from django import forms
 from django.forms import models
 from django.utils.translation import gettext_lazy as _

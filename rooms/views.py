@@ -1,4 +1,3 @@
-from aem import Query
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -8,9 +7,6 @@ from django.core.files.uploadedfile import SimpleUploadedFile
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.forms.models import model_to_dict
-from isort import file
-from joblib import parallel_backend
-from matplotlib.style import available
 
 from .models import Room
 from .forms import RoomCreationForm 
