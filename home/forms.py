@@ -1,5 +1,4 @@
 from django import forms 
-from datetimewidget.widgets import DateTimeWidget
 
 from profiles.models import Profile
 from bb2.lists import (COUNTRY_CHOICES, AGE_CHOICES, 

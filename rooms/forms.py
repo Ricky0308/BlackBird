@@ -1,7 +1,6 @@
 from django.db import models
 from django.forms import ModelForm, DateTimeInput
 from django import forms
-from sqlalchemy import false
 from .models import Room
 from profiles.models import Profile
 

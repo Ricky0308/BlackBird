@@ -31,7 +31,6 @@ from bb2.lists import TAG_LIST
 from bb2.views import c_modify_for_nav, get_user_and_profile
 from bb2.utils import get_or_none
 
-from dateutil.tz import tz
 import statistics as st
 import uuid
 
