@@ -5,8 +5,8 @@ ENV PYTHONUNBUFFERED 1
 COPY requirements.txt /backend/
 # COPY . /backend/
 RUN pip install -r requirements.txt 
-#CMD python manage.py runserver 0.0.0.0:8000
-CMD /bin/bash
+CMD python manage.py runserver 0.0.0.0:8000
+# CMD /bin/bash
 
 # command 
 # docker image build -t blackbird .
